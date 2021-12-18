@@ -1,4 +1,8 @@
-class Soundexer {};
+#include <string>
+class Soundexer {
+public:
+  std::string encode(const std::string &word) const { return ""; }
+};
 
 #include <gtest/gtest.h>
 
@@ -7,7 +11,10 @@ int main(int argc, char **argv) {
   return RUN_ALL_TESTS();
 }
 
-TEST(SoundexerEncoder, FirstCharacter) { Soundexer sdxr; }
+TEST(SoundexerEncoder, FirstCharacter) {
+  Soundexer sdxr;
+  auto encoded = sdxr.encode("A");
+}
 
 TEST(HelloTest, BasicAssertions) {
   EXPECT_STRNE("hello", "world");
