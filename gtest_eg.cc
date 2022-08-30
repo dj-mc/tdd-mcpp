@@ -1,31 +1,28 @@
+#include "Soundexer.h"
 #include <gmock/gmock.h>
-// #include <gtest/gtest.h>
 #include <string>
 
 // using ::testing::Eq;
 // using namespace testing;
-
-class Soundexer {
-public:
-  std::string encode(const std::string &word) const { return pad_zeroes(word); }
-
-private:
-  std::string pad_zeroes(const std::string &word) const { return word + "000"; }
-};
 
 class SoundexerFixture : public testing::Test {
 public:
   Soundexer sdxr;
 };
 
-TEST_F(SoundexerFixture, FirstCharacter) {
+TEST_F(SoundexerFixture, first_character) {
   auto encoded = sdxr.encode("A");
-  ASSERT_THAT(encoded, testing::Eq("A"));
+  ASSERT_THAT(encoded, testing::Eq("A000"));
 }
 
-TEST_F(SoundexerFixture, PadThreeDigits) {
-  auto encoded = sdxr.encode("I");
-  ASSERT_THAT(encoded, testing::Eq("I000"));
+TEST_F(SoundexerFixture, pad_three_digits) {
+  auto encoded = sdxr.encode("abc");
+  ASSERT_THAT(encoded.length(), testing::Eq(4));
+}
+
+TEST_F(SoundexerFixture, consonant_numeral) {
+  auto encoded = sdxr.encode("Ab");
+  ASSERT_THAT(encoded, testing::Eq("A100"));
 }
 
 int main(int argc, char **argv) {
