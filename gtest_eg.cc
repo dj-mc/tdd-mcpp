@@ -21,8 +21,9 @@ TEST_F(SoundexerFixture, pad_three_digits) {
 }
 
 TEST_F(SoundexerFixture, consonant_numeral) {
-  auto encoded = sdxr.encode("Ab");
-  ASSERT_THAT(encoded, testing::Eq("A100"));
+  EXPECT_THAT(sdxr.encode("Ab"), testing::Eq("A100"));
+  EXPECT_THAT(sdxr.encode("Ac"), testing::Eq("A200"));
+  EXPECT_THAT(sdxr.encode("Ad"), testing::Eq("A300"));
 }
 
 int main(int argc, char **argv) {

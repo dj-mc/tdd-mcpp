@@ -2,7 +2,8 @@
 #define Soundexer_h
 #include <cstddef>
 #include <iostream>
-#include <string>
+#include <map>
+#include <unordered_map>
 
 class Soundexer {
 public:
@@ -16,11 +17,20 @@ private:
     return word.substr(0, 1);
   }
 
+  std::string encoded_digit(char letter) const {
+    const std::unordered_map<char, std::string> encodings{
+        {'b', "1"},
+        {'c', "2"},
+        {'d', "3"},
+    };
+    return encodings.find(letter)->second;
+  }
+
   std::string encoded_digits(const std::string &word) const {
     if (word.length() > 1) {
-      return "1";
+      return encoded_digit(word[1]);
     } else {
-      return "";
+      return std::string();
     }
   }
 
